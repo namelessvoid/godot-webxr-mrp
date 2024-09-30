@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://bw06iqwoqo63i"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_svvy7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yem70"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_082p1"]
+albedo_color = Color(0.212305, 0.212305, 0.212305, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_332a1"]
+albedo_color = Color(1, 0.588235, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_efu35"]
+albedo_color = Color(0.568627, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nso1l"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_svvy7")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -104.5
+offset_top = 24.0
+offset_right = 104.5
+offset_bottom = 116.0
+grow_horizontal = 2
+text = "Start AR"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46891, 0, -4.96386)
+mesh = SubResource("BoxMesh_yem70")
+surface_material_override/0 = SubResource("StandardMaterial3D_082p1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.531091, 0, -4.96386)
+mesh = SubResource("BoxMesh_yem70")
+surface_material_override/0 = SubResource("StandardMaterial3D_332a1")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.468909, 0, -4.96386)
+mesh = SubResource("BoxMesh_yem70")
+surface_material_override/0 = SubResource("StandardMaterial3D_efu35")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53109, 0, -4.96386)
+mesh = SubResource("BoxMesh_yem70")
+surface_material_override/0 = SubResource("StandardMaterial3D_nso1l")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
