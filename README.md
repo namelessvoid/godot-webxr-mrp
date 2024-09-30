@@ -12,4 +12,4 @@ It is intended to be run on a tablet or smartphone.
 
 ## Frun from GH pages
 
-The project is also availabe as a pre-built version on https://www.simonkerlre.de/godot-webxr-mrp/index.html
+The project is also availabe as a pre-built version on [https://www.simonkerler.de/godot-webxr-mrp/dist/](https://www.simonkerler.de/godot-webxr-mrp/dist/).
