@@ -66,6 +66,7 @@ func _webxr_session_started() -> void:
 	$CanvasLayer.visible = false
 	# This tells Godot to start rendering to the headset.
 	get_viewport().use_xr = true
+	get_viewport().transparent_bg = true
 	# This will be the reference space type you ultimately got, out of the
 	# types that you requested above. This is useful if you want the game to
 	# work a little differently in 'bounded-floor' versus 'local-floor'.
