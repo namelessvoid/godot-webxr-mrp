@@ -1,10 +1,18 @@
 extends Node3D
  
 var webxr_interface: XRInterface
- 
+
+@onready var environment: Environment = $WorldEnvironment.environment
+@onready var enter_vr_button: Button = $CanvasLayer/Button
+@onready var screenshot_button: Button = $CanvasLayer/ScreenshotButton
+@onready var show_screenshot_button: Button = $CanvasLayer/ShowScreenshotButton
+@onready var texture_rect: TextureRect = $CanvasLayer/TextureRect
+
 func _ready() -> void:
-	$CanvasLayer.visible = false
-	$CanvasLayer/Button.pressed.connect(self._on_button_pressed)
+	enter_vr_button.visible = false
+	enter_vr_button.pressed.connect(self._on_button_pressed)
+	screenshot_button.pressed.connect(_on_screenshot_button_pressed)
+	show_screenshot_button.pressed.connect(_on_show_screenshot_button_pressed)
  
 	webxr_interface = XRServer.find_interface("WebXR")
 	if webxr_interface:
@@ -34,7 +42,7 @@ func _ready() -> void:
 func _webxr_session_supported(session_mode: String, supported: bool) -> void:
 	if session_mode == 'immersive-ar':
 		if supported:
-			$CanvasLayer.visible = true
+			enter_vr_button.visible = true
 		else:
 			OS.alert("Your browser doesn't support AR")
  
@@ -61,19 +69,33 @@ func _on_button_pressed() -> void:
 	if not webxr_interface.initialize():
 		OS.alert("Failed to initialize WebXR")
 		return
- 
+
+func _on_screenshot_button_pressed() -> void:
+	var image = get_viewport().get_texture().get_image()
+	image.save_png("user://file.png")
+
+func _on_show_screenshot_button_pressed() -> void:
+	var image = Image.load_from_file("user://file.png")
+	texture_rect.texture = ImageTexture.create_from_image(image) 
+
 func _webxr_session_started() -> void:
-	$CanvasLayer.visible = false
+	print("started session 2")
+	enter_vr_button.visible = false
 	# This tells Godot to start rendering to the headset.
 	get_viewport().use_xr = true
 	get_viewport().transparent_bg = true
+
+	environment.background_mode = Environment.BG_COLOR
+	environment.background_color = Color(0.0, 0.0, 0.0, 0.0)
+
 	# This will be the reference space type you ultimately got, out of the
 	# types that you requested above. This is useful if you want the game to
 	# work a little differently in 'bounded-floor' versus 'local-floor'.
 	print ("Reference space type: " + webxr_interface.reference_space_type)
+	print ("Env blend mode: " + str(webxr_interface.environment_blend_mode))
  
 func _webxr_session_ended() -> void:
-	$CanvasLayer.visible = true
+	enter_vr_button.visible = true
 	# If the user exits immersive mode, then we tell Godot to render to the web
 	# page again.
 	get_viewport().use_xr = false

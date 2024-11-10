@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bw06iqwoqo63i"]
+[gd_scene load_steps=8 format=3 uid="uid://bw06iqwoqo63i"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_svvy7"]
 
@@ -14,6 +14,8 @@ albedo_color = Color(1, 0.588235, 0, 1)
 albedo_color = Color(0.568627, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nso1l"]
+
+[sub_resource type="Environment" id="Environment_ig7tw"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_svvy7")
@@ -34,6 +36,32 @@ offset_right = 104.5
 offset_bottom = 116.0
 grow_horizontal = 2
 text = "Start AR"
+
+[node name="ScreenshotButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 133.0
+offset_top = 23.0
+offset_right = 228.0
+offset_bottom = 108.0
+grow_horizontal = 2
+text = "Screenshot"
+
+[node name="ShowScreenshotButton" type="Button" parent="CanvasLayer"]
+offset_left = 849.0
+offset_top = 27.0
+offset_right = 989.0
+offset_bottom = 102.0
+text = "Show screenshot"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 120.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46891, 0, -4.96386)
@@ -56,3 +84,6 @@ mesh = SubResource("BoxMesh_yem70")
 surface_material_override/0 = SubResource("StandardMaterial3D_nso1l")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ig7tw")
